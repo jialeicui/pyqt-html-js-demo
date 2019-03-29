@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <script type="text/javascript" src="qwebchannel.js"></script>
+    <title>QWebChannel test</title>
+    <script>
+        window.onload = function() {
+            new QWebChannel(qt.webChannelTransport, function(channel) {
+                window.pyjs = channel.objects.pyjs;
+                pyjs.result.connect(function(message){
+                    alert("from py:"+message);
+                })
+                
+                pyjs.test("hhhhh", function(rc){
+                    alert("call py and receive: " + rc);
+                });
+            });
+        }
+    </script>
+</head>
+<body>
+    <div>hello web</div> 
+</body>
+</html>
